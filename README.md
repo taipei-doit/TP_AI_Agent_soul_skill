@@ -45,7 +45,7 @@
 
 ### 第一步：下載規範包
 
-1. 打開這個網址：https://github.com/taipei-doit/TP_AI_Agent_soul_skill （不用登入）
+1. 打開這個網址：[https://github.com/taipei-doit/CiviClaw_skill](https://github.com/taipei-doit/TP_AI_Agent_soul_skill) （不用登入）
 2. 找到綠色的「Code」按鈕，按下去
 3. 選最下面的「Download ZIP」
 4. 下載完成後，到「下載」資料夾找到 `CiviClaw_skill-main`。Windows 通常不會顯示後面的 `.zip`，圖示是一個有拉鍊的資料夾。
@@ -296,7 +296,6 @@ AI 開工前可能會問您幾個問題，例如「這個網頁給誰用」「�
 - `soul.md` 透過 `CLAUDE.md`、`GEMINI.md` 的 `@` 匯入語法，在每次對話開始時載入；Codex、Copilot、Cursor 則由 `AGENTS.md` 指示讀取。Skill 只在 AI 判斷相關時才會載入，所以法規紅線放在 `soul.md`，確保每次都會讀到。
 - Codex CLI 讀取 `AGENTS.md` 的預設上限是 32 KiB，因此 `AGENTS.md` 只放指引，不要把兩份檔案的全文貼進去。
 - 機關若有自己的代表色、Logo 規範或內部資安規定，可以在 `SKILL.md` 或 `soul.md` 末尾增加「本機關補充規定」一節。主色更換後，請重新計算文字對比度。
-- `soul.md` 末尾列有「待核對事項」，正式採用前請法制單位核對法規原文。
 
 ## 參考資料
 
