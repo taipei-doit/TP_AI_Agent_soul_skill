@@ -75,7 +75,7 @@ metadata:
 |---|---|---|
 | 第一級：靜態頁面 | 活動說明、公告、申請須知、表單送到既有系統 | HTML、CSS、少量原生 JavaScript。不需要安裝任何工具，用瀏覽器直接打開就能看到畫面，承辦人自己也能改文字 |
 | 第二級：要存資料 | 線上報名、民眾查詢本人資料、意見回饋、簡單的案件登記 | 加上後端程式與資料庫。後端可用 Python（FastAPI、Flask、Django）、Node.js（Express 等）或機關既有的語言（PHP、Java、.NET 等） |
-| 第三級：複雜系統 | 管理後臺、多種角色權限、儀表板、大量互動畫面、檔案上傳 | 前端可用 React、Vue 等框架與建置工具（Vite 等），後端與資料庫同第二級。另須遵守本規範「玖、複雜系統」 |
+| 第三級：複雜系統 | 管理後臺、多種角色權限、儀表板、大量互動畫面、檔案上傳 | 後端與資料庫同第二級。畫面可以由伺服器產生（例如 Flask、Django 的樣板），互動很多時才用 React、Vue 等框架與建置工具。第三級不代表一定要用前端框架。另須遵守本規範「玖、複雜系統」 |
 
 選擇時依下列順序考量：
 
@@ -88,7 +88,7 @@ metadata:
 - 開發和試用階段，可以先用 SQLite（一個檔案就是一個資料庫，不用另外安裝），承辦人馬上就能試用。
 - 正式上線時，依機關資訊單位的規劃使用 PostgreSQL、MySQL、SQL Server 等資料庫。程式應透過 ORM 或資料庫抽象層存取資料，日後更換資料庫時才不用大改。
 - 資料庫連線字串、帳號密碼放在環境變數或設定檔，不得寫在程式碼裡，設定檔也不得放進版本控制。
-- 其他資料庫規定見「玖、七」。
+- 其他資料庫規定見「玖、九」。
 
 三、**不論哪一級，都要遵守的事。** 使用框架或元件庫時，仍要遵守本規範的視覺、用語、無障礙、資安規定。`tp.css` 的 CSS 變數可以直接沿用到 React、Vue 等框架；使用 Mantine、Bootstrap 這類元件庫時，要把配色、字型、圓角改成本規範的設定，並移除漸層、大陰影、動畫等「伍、不要做的樣式」。
 
@@ -404,7 +404,8 @@ AI 做網頁很容易套出同一種版型：藍紫漸層、滿版 emoji、毛�
 - 日期依機關習慣，對外服務可用「115 年 10 月 12 日」或「2026 年 10 月 12 日」，同一個網站統一一種。這是指**顯示**的格式。
 - 日期**輸入**欄位：瀏覽器內建的日期選擇器（`<input type="date">`）只能選西元年，顯示格式又跟著電腦的語言設定走，所以：
   - 給民眾填寫的表單，網站用民國年時，改用「年、月、日」三個數字欄位（`inputmode="numeric"`），外層用 `<fieldset>` 和 `<legend>` 標出這是一個日期，例如「出生日期：民國〔　〕年〔　〕月〔　〕日」。送出前檢查日期是否存在。
-  - 管理後臺的篩選條件，可以使用內建日期選擇器，欄位說明寫明「請以西元年選擇」；查詢結果與列表仍以民國年顯示。
+  - 民眾用來查詢的日期篩選，優先改用「月份」下拉選單或「本週、本月」這類選項，避免讓民眾輸入日期。
+  - 管理後臺的篩選條件與資料輸入（例如活動時間），可以使用內建的日期或日期時間選擇器，欄位說明寫明「請以西元年選擇」；查詢結果與列表仍以民國年顯示。
   - 資料庫一律存西元日期（ISO 格式，例如 2026-10-12），只在畫面上轉換成民國年。
 - 數字、英文和中文之間留一個半形空格（「保存 3 年」「Excel 檔案」）。
 - 標點用全形：，。、；：「」（）。不用驚嘆號。
@@ -570,6 +571,10 @@ Referrer-Policy: strict-origin-when-cross-origin
 
 對外頁面頁尾要求的地址、資料開放宣告、全球資訊網連結，後臺可以省略。「資料保護說明」是寫給同仁看的，說明系統裡有哪些個人資料、誰可以看、保存多久、存取會留下紀錄、外洩時找誰通報；不需要照抄對外隱私權政策的六項告知。
 
+**後臺登入頁**
+
+還沒登入的頁面（登入、忘記密碼、首次登入改密碼）沒有左側選單，用單欄置中版型（寬約 28em），頁首放局處 Logo 與系統名稱並標示「管理系統」，標題用黑體，不放四色條。
+
 **後臺元件規定**
 
 - **表格**：要有 `<caption>`、欄位標題、分頁與每頁筆數；可排序的欄位標題要是按鈕，並用 `aria-sort` 標示目前排序。資料多時用伺服器端分頁，不要一次全部載入。
@@ -583,7 +588,7 @@ Referrer-Policy: strict-origin-when-cross-origin
 - **理由欄位**：不利於民眾的決定（駁回、退件、通知補件）必須填寫理由才能送出，欄位說明要提醒「這段文字會通知申請人」。核准、錄取這類有利的決定，可以讓承辦人選填備註。
 - **批次操作**：先勾選，再選動作，執行前顯示「將對 12 筆資料執行停用」。
 - **狀態**：用文字加顏色表示（「已結案」「處理中」「退件」），不能只用色點。
-- **對話框**：使用原生 `<dialog>` 元素。開啟時焦點移進對話框：需要填寫理由的，焦點放在理由欄位；只需要確認的，焦點放在「取消」，避免按 Enter 就誤送出。按 Esc 可關閉，關閉後焦點回到原本的按鈕。按鈕排列為「取消」在前、確認鈕在後，確認鈕的文字寫出動作（「確定退件」，不寫「確定」）。
+- **對話框**：使用原生 `<dialog>` 元素。開啟時焦點移進對話框：需要填寫理由的，焦點放在理由欄位；只需要確認的，焦點放在「取消」，避免按 Enter 就誤送出。按 Esc 可關閉，關閉後焦點回到原本的按鈕。按鈕排列為「取消」在前、確認鈕在後，確認鈕的文字寫出動作（「確定退件」，不寫「確定」）。注意：對話框若放在 `<form>` 裡面，對話框關閉時，其中標了 `required` 的欄位仍會被瀏覽器檢查，擋住整張表單送出。對話框應有自己獨立的 `<form method="dialog">` 或獨立的送出表單。需要確認的動作，在沒有 JavaScript 時也要能運作（例如改成先到一個確認頁）。
 - **登入逾時**：逾時前 2 分鐘提醒，並可一鍵延長，避免同仁打到一半的資料不見。
 
 ### 三、登入與權限
@@ -596,7 +601,10 @@ Referrer-Policy: strict-origin-when-cross-origin
 - 登入的程式要獨立寫成一個模組，其他功能只透過這個模組取得「目前是誰、是什麼角色」。之後換成其他登入方式時，只要改這個模組，不用動到整個系統。
 - 自己做的帳號密碼仍要做到基本安全：
   - 密碼用 bcrypt、scrypt 或 Argon2 雜湊後儲存，不得明文或可逆加密。
-  - 連續輸入錯誤要鎖定一段時間。
+  - 連續輸入錯誤要暫時鎖定。沒有機關規定時，預設連續錯 5 次鎖定 15 分鐘。鎖定應以「帳號加來源 IP」計算，或改用逐次拉長等待時間，避免有心人故意輸錯把別人的帳號鎖住。
+  - 密碼至少 12 個字元，不強制定期更換，但要擋掉常見的弱密碼（例如 `12345678`、`password`）。
+  - 閒置 30 分鐘自動登出，逾時前 2 分鐘提醒並可一鍵延長（見「玖、二」）。
+  - 以上是預設值；機關資通安全規定另有要求時，依機關規定。
   - 不得寫死 `admin／admin` 這類預設帳號密碼；初始管理者帳號由啟動指令或設定檔建立，首次登入強制變更密碼。
 
 **正式上線階段（建議）**
@@ -613,6 +621,8 @@ Referrer-Policy: strict-origin-when-cross-origin
   - 不能只靠網址不公開來保護後臺。
   - 承辦人只能看到自己業務範圍的資料時，查詢條件要在後端強制加上，不能交給前端篩選。
 - **Session**：Cookie 設 `Secure`、`HttpOnly`、`SameSite=Lax`；登出要讓伺服器端的 session 失效；表單送出要有 CSRF 防護。
+  - 試用階段在本機用 `http://127.0.0.1` 或 `http://localhost` 開啟時，瀏覽器允許 `Secure` Cookie，可以正常登入。同事用區網 IP（例如 `http://192.168.x.x`）連進來會無法登入，這是正常的安全行為。不要為了方便而關掉 `Secure`，請在 README 說明只能用本機網址試用，或請資訊單位架設有 HTTPS 的測試主機。
+- **民眾查詢功能**：讓民眾用「編號加手機號碼」這類資料查詢或取消的功能，要限制失敗次數。沒有機關規定時，預設同一來源 IP 15 分鐘內最多失敗 10 次，避免被人亂猜編號。
 
 ### 四、檔案上傳
 
@@ -652,14 +662,34 @@ Referrer-Policy: strict-origin-when-cross-origin
 - 匯出 CSV 時，儲存格開頭是 `=`、`+`、`-`、`@` 的內容，要在前面加上單引號，避免用 Excel 打開時被當成公式執行。
 - 圖表要同時提供資料表格（見「陸、五」）。
 
-### 七、資料庫
+### 七、名額與重複送出
+
+報名、預約、申請這類有名額的系統，最常出事的是**超收**和**重複報名**。前端擋重複點擊不夠，後端必須做到：
+
+- 名額檢查和寫入要在同一個資料庫交易裡完成，並鎖定該活動的資料列（或用條件式更新，例如「目前人數小於名額才加一」），避免很多人同時搶最後一個名額時超收。
+- 每份表單帶一個一次性代碼，同一個代碼重複送出只建立一筆，並回到同一個結果頁。
+- 依業務規則加上資料庫唯一索引，例如「同一活動、同一手機號碼只能報名一次」，讓程式疏漏時資料庫還能再擋一次。
+- 表單送出成功後，轉到結果頁（Post/Redirect/Get），使用者按重新整理時不會再送一次。
+- 交付前要實測：多人同時搶最後一個名額、連按送出、同一資料重複報名。
+
+### 八、多機關共用的平臺
+
+一個平臺給很多局處共用（例如全市活動報名、共用預約系統）時：
+
+- **頁首與頁尾**：放負責維運的機關（例如資訊局）的 Logo 與聯絡資料，頁尾註明「本網站由臺北市政府〇〇局維護」。
+- **各頁內容**：每個活動或服務頁面清楚寫出主辦機關與洽詢方式，讓民眾知道有問題要找誰。
+- **個資告知**：蒐集機關寫主辦該活動的機關，告知事項依主辦機關填寫的內容自動帶入；另外註明網站由哪個機關維運。若主辦機關與維運機關之間有委託處理個資的關係，具體寫法請承辦人洽機關法制或個資窗口確認。
+- **權限**：各機關只能看到、管理自己的資料，查詢條件在後端強制加上（見「玖、三」）。
+- **頁面上的機關資料**：主辦機關的地址、電話若要顯示，由各機關承辦人在後臺填寫，或由 AI 從各機關官網抄錄並標示來源；不知道時用〔請填入〕，不要編。
+
+### 九、資料庫
 
 - 一律使用參數化查詢或 ORM，不得字串拼接 SQL。
 - 資料庫帳號只給程式需要的權限，不用最高權限帳號連線。
 - 個資欄位依需要加密儲存。
 - 交付說明要提醒：正式上線前要建立備份機制，並實際測試還原。
 
-### 八、交付時要多寫的事
+### 十、交付時要多寫的事
 
 交付說明的「上線前還要做的事」，除了一般項目，還要列出：
 
@@ -670,7 +700,7 @@ Referrer-Policy: strict-origin-when-cross-origin
 
 ## 拾、頁面範本
 
-以下是可以直接使用的完整範本（對外頁面）。管理後臺沿用同一份 `tp.css` 的配色與元件，版型依「玖、二」調整。〔 〕內是要換成實際內容的地方。
+以下是可以直接使用的完整範本（對外頁面）。管理後臺沿用同一份 `tp.css`，版型依「玖、二」：`<body class="tp-admin">`，內容外層用 `.tp-admin-layout`，左側選單用 `.tp-sidenav`，登入頁用 `.tp-login`；另有分頁 `.tp-pagination`、確認對話框 `.tp-dialog`、單選複選群組 `.tp-fieldset`／`.tp-choice`、危險按鈕 `.tp-btn--danger` 可直接使用。〔 〕內是要換成實際內容的地方。
 
 ### 一、index.html
 
@@ -1086,6 +1116,12 @@ p { margin: 0 0 1rem; }
 .tp-field input[type="email"],
 .tp-field input[type="number"],
 .tp-field input[type="date"],
+.tp-field input[type="datetime-local"],
+.tp-field input[type="time"],
+.tp-field input[type="month"],
+.tp-field input[type="password"],
+.tp-field input[type="search"],
+.tp-field input[type="url"],
 .tp-field select,
 .tp-field textarea {
   width: 100%;
@@ -1105,6 +1141,13 @@ p { margin: 0 0 1rem; }
 .tp-field--check input { width: 24px; height: 24px; margin: 4px 0 0; flex: none; }
 .tp-field--check label { flex: 1; margin: 0; font-weight: 400; }
 .tp-field--check .tp-field__error { flex-basis: 100%; }
+
+/* 單選、複選群組：外層用 fieldset＋legend */
+.tp-fieldset { border: 0; margin: 0; padding: 0; }
+.tp-fieldset legend { font-weight: 600; margin-bottom: 6px; padding: 0; }
+.tp-choice { display: flex; align-items: flex-start; gap: 10px; min-height: 44px; padding: 8px 0; }
+.tp-choice input { width: 24px; height: 24px; margin: 2px 0 0; flex: none; }
+.tp-choice label { margin: 0; font-weight: 400; }
 
 /* 結果訊息 */
 .tp-status:empty { display: none; }
@@ -1127,6 +1170,47 @@ p { margin: 0 0 1rem; }
 .tp-table td { padding: 10px 12px; border-bottom: 1px solid var(--tp-border); text-align: left; vertical-align: top; }
 .tp-table th { background: var(--tp-primary-tint); color: var(--tp-ink); font-weight: 700; }
 
+/* 分頁 */
+.tp-pagination ul { list-style: none; margin: 24px 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.tp-pagination a,
+.tp-pagination span {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 44px; min-height: 44px; padding: 0 12px;
+  border: 1px solid var(--tp-border-input); border-radius: var(--tp-radius);
+  text-decoration: none; color: var(--tp-primary); background: var(--tp-surface);
+}
+.tp-pagination [aria-current="page"] { background: var(--tp-primary); border-color: var(--tp-primary); color: #FFFFFF; font-weight: 700; }
+
+/* 確認對話框（原生 dialog） */
+.tp-dialog {
+  width: min(32em, calc(100vw - 32px));
+  padding: 24px;
+  border: 1px solid var(--tp-border);
+  border-radius: var(--tp-radius);
+  background: var(--tp-surface);
+  color: var(--tp-text);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, .12);
+}
+.tp-dialog::backdrop { background: rgba(22, 50, 74, .45); }
+.tp-dialog h2 { font-family: var(--tp-font-sans); font-size: 1.25rem; margin-bottom: 12px; }
+.tp-dialog__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; margin-top: 20px; }
+
+/* 管理後臺版面：<body class="tp-admin">，內容外層 .tp-admin-layout */
+.tp-admin-layout { display: grid; grid-template-columns: 14rem minmax(0, 1fr); gap: 32px; max-width: 90em; margin: 0 auto; padding: 24px 20px 56px; }
+.tp-admin-layout .tp-main { max-width: none; margin: 0; padding: 0; }
+.tp-sidenav ul { list-style: none; margin: 0; padding: 0; }
+.tp-sidenav a {
+  display: block; min-height: 44px; padding: 10px 14px;
+  border-left: 3px solid transparent; border-radius: 0 var(--tp-radius) var(--tp-radius) 0;
+  color: var(--tp-text); font-weight: 600; text-decoration: none;
+}
+.tp-sidenav a:hover { background: var(--tp-band); color: var(--tp-primary-dark); }
+.tp-sidenav a[aria-current="page"] { border-left-color: var(--tp-primary); background: var(--tp-primary-tint); color: var(--tp-primary-dark); }
+.tp-sidenav__group { margin: 20px 0 6px; padding-left: 14px; font-size: 0.875rem; font-weight: 700; color: var(--tp-text-muted); }
+
+/* 後臺登入頁：單欄置中 */
+.tp-login { max-width: 28em; margin: 48px auto; padding: 0 20px; }
+
 /* 路徑 */
 .tp-crumbs ol { list-style: none; margin: 0 0 24px; padding: 0; display: flex; flex-wrap: wrap; font-size: 0.9375rem; }
 .tp-crumbs li + li::before { content: "／"; padding: 0 6px; color: var(--tp-text-muted); }
@@ -1147,6 +1231,8 @@ p { margin: 0 0 1rem; }
 
 /* 手機版 */
 @media (max-width: 640px) {
+  /* 後臺左側選單改到內容上方，由「選單」按鈕開合 */
+  .tp-admin-layout { grid-template-columns: 1fr; gap: 16px; }
   /* 手機上頁首會換行變高，改為隨頁面捲動 */
   .tp-header { position: static; }
   html { scroll-padding-top: 16px; }
@@ -1292,9 +1378,9 @@ document.addEventListener('DOMContentLoaded', () => {
 [ ] 圖片都有 alt
 [ ] 每個欄位都有 label
 [ ] 只用鍵盤可以完成所有操作，看得到焦點框
-[ ] 文字對比符合目標等級（AA 4.5:1／AAA 7:1）
+[ ] 文字對比符合目標等級（AA 4.5:1／AAA 7:1；沿用本規範色票即符合，自訂顏色要用對比檢查工具實測）
 [ ] 不靠顏色單獨傳達資訊
-[ ] 放大到 200% 沒有左右捲軸
+[ ] 放大到 200% 沒有左右捲軸（可用瀏覽器縮放 200%，或把視窗寬度設為 640px 檢查）
 [ ] 沒有放未取得的無障礙標章
 
 【個資與資安】
@@ -1317,6 +1403,10 @@ document.addEventListener('DOMContentLoaded', () => {
 [ ] 刪除等不可復原操作有確認步驟
 [ ] 有操作紀錄，紀錄中沒有密碼與完整個資
 [ ] 匯出有權限控管，CSV 已防範公式注入
+[ ] 表單有 CSRF 防護；登出後伺服器端 session 失效
+[ ] 登入鎖定、閒置逾時、密碼長度已設定；民眾查詢功能有限制失敗次數
+[ ] 有名額的功能：後端以交易控制名額、一次性代碼防重複送出、唯一索引擋重複報名，並已實測
+[ ] 已提醒上線前建立備份並實測還原
 
 【交付】
 [ ] 附上交付說明
@@ -1333,7 +1423,14 @@ document.addEventListener('DOMContentLoaded', () => {
 　　〔用兩三句話說明做了什麼，例：完成「○○講座線上報名」網頁，共 3 頁：報名頁、無障礙聲明、隱私權政策。〕
 
 二、怎麼打開來看
-　　〔例：用滑鼠雙擊資料夾裡的 index.html，就會用瀏覽器打開。〕
+　　〔第一級靜態頁面，例：用滑鼠雙擊資料夾裡的 index.html，就會用瀏覽器打開。〕
+　　〔第二、三級系統，寫出完整步驟，例：
+　　　（一）安裝 Python 3.12（下載網址）。
+　　　（二）在資料夾裡執行安裝指令：〔指令〕。
+　　　（三）建立第一個管理者帳號：〔指令〕。
+　　　（四）啟動：〔指令〕，再用瀏覽器打開 http://127.0.0.1:5000/。
+　　　（五）關閉：在終端機按 Ctrl＋C。
+　　　每個指令都要能直接複製貼上；需要資訊單位協助的步驟要寫明。〕
 
 三、我做的假設（請確認）
 　　（一）〔例：報名欄位只放姓名、手機、電子郵件。〕
