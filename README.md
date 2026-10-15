@@ -45,10 +45,10 @@
 
 ### 第一步：下載規範包
 
-1. 打開這個網址：[https://github.com/taipei-doit/CiviClaw_skill](https://github.com/taipei-doit/TP_AI_Agent_soul_skill) （不用登入）
+1. 打開這個網址：[https://github.com/taipei-doit/TP_AI_Agent_soul_skill](https://github.com/taipei-doit/TP_AI_Agent_soul_skill) （不用登入）
 2. 找到綠色的「Code」按鈕，按下去
 3. 選最下面的「Download ZIP」
-4. 下載完成後，到「下載」資料夾找到 `CiviClaw_skill-main`。Windows 通常不會顯示後面的 `.zip`，圖示是一個有拉鍊的資料夾。
+4. 下載完成後，到「下載」資料夾找到 `TP_AI_Agent_soul_skill-main`。Windows 通常不會顯示後面的 `.zip`，圖示是一個有拉鍊的資料夾。
 5. 在檔案上按滑鼠右鍵，選「解壓縮全部」（Windows）或直接雙擊（Mac）
 
 解壓縮後會出現一個資料夾。打開後如果裡面還有一層同名資料夾，就再點進去，可以看到 `soul.md`、`SKILL.md`、`README.md` 三個檔案。Windows 可能只顯示 `soul`、`SKILL`、`README`，沒有後面的 `.md`，這是正常的。
