@@ -1,32 +1,33 @@
 # 臺北市政府 AI 開發規範包
 
-請 AI 幫您寫程式時，搭配這份規範包，做出來的網頁會符合臺北市政府的版面風格，也會遵守 AI 使用的相關規定。
+請 AI 幫您寫程式時，搭配這份規範包，不論是整理 Excel、處理 Word 文件的小工具，還是報名網站、管理系統，做出來的東西都會好用、安全，也會遵守 AI 使用的相關規定。
 
 ---
 
 ## 這是什麼？
 
-現在很多 AI 工具（例如 Claude Code、OpenAI Codex、Gemini CLI、Google Antigravity、GitHub Copilot）都可以幫忙寫程式。您只要用中文說「幫我做一個活動報名網頁」，它就會寫出來。
+現在很多 AI 工具（例如 Claude Code、OpenAI Codex、Gemini CLI、Google Antigravity、GitHub Copilot）都可以幫忙寫程式。您只要用中文說「幫我做一個工具，把各梯次的報名 Excel 合併成一份」或「幫我做一個活動報名網頁」，它就會寫出來。
 
 不過，AI 每次做出來的樣子都不一樣，常常是藍紫色漸層加上許多表情符號，看起來不像政府網站；它也不知道政府機關有哪些規定要遵守。
 
-這個規範包就是一份「給 AI 看的工作守則」。把它放進您的資料夾，AI 開工前會先讀過，做出來的網頁可以做到：
+這個規範包就是一份「給 AI 看的工作守則」。把它放進您的資料夾，AI 開工前會先讀過，並且：
 
-- 長得像臺北市政府的網站，有您機關的 Logo，有完整的頁尾資訊
-- 用公務機關平常講話的方式寫文字
-- 符合無障礙規範，長輩和視障朋友也能使用
-- 保護民眾個資，不蒐集不必要的資料
-- 遵守《人工智慧基本法》和行政院、臺北市政府的 AI 使用規定
+- 自己判斷要套用哪些規定。做 Excel 工具就不會硬套網站的版面，做報名網站才會加上個資告知、無障礙等規定。
+- 自己處理技術問題。防止資料外洩、被駭的寫法，AI 會直接做好，您不需要懂這些術語。
+- 做完會自己檢查，照實告訴您哪些測過、哪些還沒測，不會把沒測過的說成沒問題。
+- 交付時用白話說明能不能用、資料存在哪裡、有哪些限制、給別人用之前還要做什麼。
+- 畫面和文字都像臺北市政府的風格，不會出現藍紫色漸層、表情符號這類 AI 常見的樣子。
+- 遵守《人工智慧基本法》和行政院、臺北市政府的 AI 使用規定。
 
 ## 裡面有哪些檔案？
 
 | 檔案 | 用途 | 白話說明 |
 |---|---|---|
 | `soul.md` | AI 的基本立場與法規紅線 | 告訴 AI「你在替市政府做事，哪些事絕對不能做」 |
-| `SKILL.md` | 開發規範與網頁範本 | 告訴 AI「網頁要做成什麼樣子、文字怎麼寫、程式怎麼寫」 |
+| `taipei-gov-dev` 資料夾 | 開發規範與範本 | 告訴 AI「依工作類型該怎麼做、怎麼檢查、怎麼交代」。裡面有入口檔 `SKILL.md`、分主題的規範（`references` 資料夾）和網頁範本（`templates` 資料夾） |
 | `README.md` | 安裝說明 | 就是您現在在看的這份 |
 
-您不需要看懂 `soul.md` 和 `SKILL.md` 的內容，那是寫給 AI 看的。有興趣的話，也可以打開來看。
+您不需要看懂 `soul.md` 和 `taipei-gov-dev` 資料夾的內容，那是寫給 AI 看的。有興趣的話，也可以打開來看。
 
 ---
 
@@ -45,13 +46,13 @@
 
 ### 第一步：下載規範包
 
-1. 打開這個網址：[https://github.com/taipei-doit/TP_AI_Agent_soul_skill](https://github.com/taipei-doit/TP_AI_Agent_soul_skill) （不用登入）
+1. 打開這個網址：https://github.com/taipei-doit/TP_AI_Agent_soul_skill （不用登入）
 2. 找到綠色的「Code」按鈕，按下去
 3. 選最下面的「Download ZIP」
 4. 下載完成後，到「下載」資料夾找到 `TP_AI_Agent_soul_skill-main`。Windows 通常不會顯示後面的 `.zip`，圖示是一個有拉鍊的資料夾。
-5. 在檔案上按滑鼠右鍵，選「解壓縮全部」（Windows）或直接雙擊（Mac）
+5. 在檔案上按滑鼠右鍵，選「解壓縮全部」（Windows）或直接按兩下（Mac）
 
-解壓縮後會出現一個資料夾。打開後如果裡面還有一層同名資料夾，就再點進去，可以看到 `soul.md`、`SKILL.md`、`README.md` 三個檔案。Windows 可能只顯示 `soul`、`SKILL`、`README`，沒有後面的 `.md`，這是正常的。
+解壓縮後會出現一個資料夾。打開後如果裡面還有一層同名資料夾，就再點進去，可以看到 `soul.md`、`README.md` 兩個檔案和一個 `taipei-gov-dev` 資料夾。Windows 可能只顯示 `soul`、`README`，沒有後面的 `.md`，這是正常的。
 
 ### 第二步：建立您的工作資料夾
 
@@ -59,14 +60,14 @@
 
 1. 在桌面（或您習慣的位置）按滑鼠右鍵，選「新增」→「資料夾」（Mac 是「新增檔案夾」）
 2. 取一個看得懂的名字，例如 `講座報名網頁`
-3. 把剛剛下載的 `soul.md` 和 `SKILL.md` 複製到這個資料夾裡
+3. 把剛剛下載的 `soul.md` 檔案和**整個** `taipei-gov-dev` 資料夾，複製到這個資料夾裡
 
-現在您的資料夾裡有這兩個檔案：
+現在您的資料夾裡有這兩樣東西：
 
 ```
 講座報名網頁
   soul.md
-  SKILL.md
+  taipei-gov-dev（資料夾）
 ```
 
 ### 第三步：讓 AI 工具在這個資料夾裡工作
@@ -105,7 +106,7 @@ AI 開發工具要「進到」您的資料夾，才能讀到規範、在裡面�
 ```
 請幫我在這個資料夾完成「臺北市政府 AI 開發規範包」的設定，照下面步驟做，不要做其他修改。
 
-步驟一：建立資料夾 .claude/skills/taipei-gov-dev/，把 SKILL.md 移進去（檔名維持 SKILL.md）。
+步驟一：建立資料夾 .claude/skills/，把整個 taipei-gov-dev 資料夾（含裡面所有檔案與子資料夾）移進去，成為 .claude/skills/taipei-gov-dev/。
 
 步驟二：soul.md 留在原位，不要移動。
 
@@ -116,7 +117,7 @@ AI 開發工具要「進到」您的資料夾，才能讀到規範、在裡面�
 本專案由臺北市政府同仁使用。開始任何工作前，必須先完整閱讀下列兩個檔案，並在整個工作過程中遵守：
 
 - soul.md：AI 協助公務的基本立場與法規紅線，優先於其他所有規定
-- .claude/skills/taipei-gov-dev/SKILL.md：臺北市政府網頁開發規範與範本
+- .claude/skills/taipei-gov-dev/SKILL.md：臺北市政府開發規範的入口，請依其中的說明判斷工作類型，再閱讀需要的規範檔
 
 你所使用的工具即使不支援 Skill 功能，也請直接開啟上述 SKILL.md 檔案閱讀。
 若無法讀取這兩個檔案，請先告知使用者，不要直接開始開發。
@@ -147,7 +148,7 @@ description: 臺北市政府 AI 開發規範
 ```
 
 2. AI 動手前可能會用英文詢問您是否允許，例如「Do you want to create AGENTS.md?」，請選第一個「Yes」。如果您選了「Yes, and don't ask again」，`.claude` 資料夾裡可能會多出一個 `settings.local.json`，這也是正常的。
-3. 完成後，AI 會列出檔案清單。顯示方式可能和下面不太一樣（例如前面多了 `./`），只要下面這 7 個都有出現就對了：
+3. 完成後，AI 會列出檔案清單。顯示方式可能和下面不太一樣（例如前面多了 `./`），只要下面這幾個都有出現就對了（`taipei-gov-dev` 資料夾裡還會有其他檔案，不用一一核對）：
 
 ```
 soul.md
@@ -184,7 +185,17 @@ GEMINI.md
 
 設定完成後，就可以直接用中文告訴 AI 您要什麼。說得越具體，做出來越接近您要的。
 
-**範例一：活動報名**
+**範例一：整理 Excel 名單**
+
+```
+我是臺北市政府社會局的承辦人，每梯次的報名名單是一個 Excel 檔，
+想要一個工具把所有梯次合併成一份，找出同一個人重複報名的資料。
+我的電腦不能自己安裝軟體。
+```
+
+AI 會請您提供欄位名稱和幾列換成假資料的範例，**不要把真實的名單給 AI 看**。AI 照格式寫好工具後，您再用工具處理真實檔案，資料不會離開您的電腦。
+
+**範例二：活動報名**
 
 ```
 我是臺北市政府社會局的承辦人，要做一個「長青學苑秋季班」的線上報名網頁。
@@ -192,14 +203,14 @@ GEMINI.md
 報名資料只用來通知上課，活動結束後 3 個月刪除。
 ```
 
-**範例二：查詢服務**
+**範例三：查詢服務**
 
 ```
 我是臺北市政府環境保護局的承辦人，想做一個網頁讓民眾輸入地址，查詢那一區的垃圾車時間。
 資料我有一份 Excel 檔，我等一下放進資料夾。
 ```
 
-**範例三：內部小工具**
+**範例四：內部小工具**
 
 ```
 我是臺北市政府文化局的承辦人，想做一個內部用的小工具，
@@ -220,8 +231,8 @@ AI 開工前可能會問您幾個問題，例如「這個網頁給誰用」「�
 這個做法目前只確定 Claude Code 適用。請在 Claude Code 裡貼上：
 
 ```
-請幫我把這個資料夾裡的 SKILL.md 和 soul.md 安裝到我電腦的全域設定：
-1. 把 SKILL.md 複製到 ~/.claude/skills/taipei-gov-dev/SKILL.md
+請幫我把這個資料夾裡的 taipei-gov-dev 資料夾和 soul.md 安裝到我電腦的全域設定：
+1. 把整個 taipei-gov-dev 資料夾複製到 ~/.claude/skills/taipei-gov-dev/
 2. 把 soul.md 複製到 ~/.claude/taipei-gov-soul.md
 3. 在 ~/.claude/CLAUDE.md 的最後加上一行：@~/.claude/taipei-gov-soul.md
    （如果 ~/.claude/CLAUDE.md 不存在，就新建一個）
@@ -283,19 +294,21 @@ AI 開工前可能會問您幾個問題，例如「這個網頁給誰用」「�
 
 **問：規範更新了怎麼辦？**
 
-答：重新從第一步下載，用新的 `soul.md` 和 `SKILL.md` 覆蓋舊的就好。如果您的資料夾已經設定過，先把新的 SKILL.md 放進資料夾最上層，再請 AI 幫您：「請用資料夾最上層新的 SKILL.md 覆蓋 .claude/skills/taipei-gov-dev/SKILL.md，完成後刪除最上層那份 SKILL.md。」新的 soul.md 直接覆蓋舊的即可。
+答：重新從第一步下載。新的 `soul.md` 直接覆蓋舊的。`taipei-gov-dev` 資料夾先放進您的專案資料夾最上層，再請 AI 幫您：「請刪除 .claude/skills/taipei-gov-dev 資料夾，改用最上層新的 taipei-gov-dev 資料夾移進去取代。」
 
 ---
 
 ## 給機關資訊單位的說明
 
-- `SKILL.md` 採用 Agent Skills 格式（YAML frontmatter ＋ Markdown），`name` 為 `taipei-gov-dev`，只放一份在 `.claude/skills/taipei-gov-dev/`。Claude Code、VS Code Copilot、Cursor 會從這個位置載入 Skill；Codex CLI、Gemini CLI 不掃描 `.claude/skills/`，改由 `AGENTS.md`、`GEMINI.md` 指示直接讀取檔案。不另外複製到 `.agents/skills/`，是為了避免 VS Code 同時讀到兩份同名 Skill，也避免更新時兩份內容不一致。
+- Skill 採用 Agent Skills 格式，資料夾 `taipei-gov-dev/`：`SKILL.md`（YAML frontmatter，`name` 為 `taipei-gov-dev`）是入口，依工作類型（文件與資料處理工具、小工具、對外網頁、表單、系統、含 AI 功能）指示 AI 讀取 `references/` 中需要的規範，範本在 `templates/`。AI 只會載入需要的部分，做 Excel 工具時不會套用網站規範。
+- `references/` 的規定標有〔法〕〔府〕〔建議〕，分別代表法律明文、行政院或市府規定、本規範建議；法規條號、文號與原文網址集中在 `references/legal-sources.md`。
+- 整個資料夾只放一份在 `.claude/skills/taipei-gov-dev/`。Claude Code、VS Code Copilot、Cursor 會從這個位置載入 Skill；Codex CLI、Gemini CLI 不掃描 `.claude/skills/`，改由 `AGENTS.md`、`GEMINI.md` 指示直接讀取檔案。不另外複製到 `.agents/skills/`，是為了避免 VS Code 同時讀到兩份同名 Skill，也避免更新時兩份內容不一致。
 - `CLAUDE.md`、`GEMINI.md` 的 `@` 匯入語法只有 Claude Code 和 Gemini CLI 看得懂。GitHub Copilot 也會讀這兩個檔案，但只會看到文字，不會出錯；它另外從 `AGENTS.md` 與 `.github/copilot-instructions.md` 取得完整指示。
 - Google Antigravity 會讀 `AGENTS.md`、`GEMINI.md` 與 `.agents/rules/*.md`，但只用 `.agents/skills/` 載入 Skill，`GEMINI.md` 裡的 `@soul.md` 也只會變成檔案路徑、不會載入內容。因此另建 `.agents/rules/taipei-gov.md`（`trigger: always_on`），用 `@[soul.md](../../soul.md)` 把 soul.md 全文嵌入，SKILL.md 則以路徑指示讀取。Antigravity 單一規則檔上限 24 KB（嵌入後計算），soul.md 若日後擴寫，請注意不要超過。
 - 其他未列出的工具（例如 Windsurf、Cline、JetBrains AI Assistant），多半支援 `AGENTS.md`；不支援時，請在每次對話開頭先輸入「請先閱讀 AGENTS.md，並依照其中指示閱讀 soul.md 與 SKILL.md」。
-- `soul.md` 透過 `CLAUDE.md`、`GEMINI.md` 的 `@` 匯入語法，在每次對話開始時載入；Codex、Copilot、Cursor 則由 `AGENTS.md` 指示讀取。Skill 只在 AI 判斷相關時才會載入，所以法規紅線放在 `soul.md`，確保每次都會讀到。
+- `soul.md` 透過 `CLAUDE.md`、`GEMINI.md` 的 `@` 匯入語法，在每次對話開始時載入；Codex、Copilot、Cursor 則由 `AGENTS.md` 指示讀取。Skill 只在 AI 判斷相關時才會載入，所以法規紅線放在 `soul.md`，每次對話都會讀到。
 - Codex CLI 讀取 `AGENTS.md` 的預設上限是 32 KiB，因此 `AGENTS.md` 只放指引，不要把兩份檔案的全文貼進去。
-- 機關若有自己的代表色、Logo 規範或內部資安規定，可以在 `SKILL.md` 或 `soul.md` 末尾增加「本機關補充規定」一節。主色更換後，請重新計算文字對比度。
+- 機關若有自己的代表色、Logo 規範或內部資安規定，可以在 `taipei-gov-dev/references/` 對應的檔案（例如 `web-ui.md`、`security.md`）或 `soul.md` 末尾增加「本機關補充規定」一節。主色更換後，請重新計算文字對比度。
 
 ## 參考資料
 

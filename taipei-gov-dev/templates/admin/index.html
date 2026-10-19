@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>〔頁面名稱〕｜〔系統名稱〕管理系統｜臺北市政府〔機關〕</title>
+  <!-- tp.css 從 templates/web/assets/ 複製到本專案的 assets/ -->
+  <link rel="stylesheet" href="assets/tp.css">
+  <script src="assets/admin.js" defer></script>
+</head>
+<body class="tp-admin">
+  <a class="tp-skip" href="#main">跳到主要內容</a>
+
+  <header class="tp-header" id="top">
+    <a class="tp-accesskey" href="#top" accesskey="U" title="上方功能區塊">:::</a>
+    <div class="tp-header__inner tp-admin-header">
+      <a class="tp-brand" href="./">
+        <!-- 局處 Logo 依 references/web-ui.md 四取得；找不到時刪除 img，只留機關全銜文字 -->
+        <img src="assets/logo.svg" alt="臺北市政府〔機關〕" height="40">
+        <span class="tp-brand__name">〔系統名稱〕</span>
+        <span class="tp-tag">管理系統</span>
+      </a>
+      <button class="tp-btn tp-btn--secondary tp-btn--small tp-menu-toggle" type="button"
+              aria-expanded="false" aria-controls="admin-menu admin-nav">選單</button>
+      <div class="tp-admin-user" id="admin-menu">
+        <span>〔姓名〕（〔角色〕）</span>
+        <form method="post" action="〔登出網址〕">
+          <!-- 正式系統須加 CSRF 代碼 -->
+          <button class="tp-btn tp-btn--secondary tp-btn--small" type="submit">登出</button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <div class="tp-admin-layout">
+    <nav class="tp-sidenav" id="admin-nav" aria-label="功能選單">
+      <p class="tp-sidenav__group">〔功能群組，例：案件管理〕</p>
+      <ul>
+        <li><a href="./" aria-current="page">〔案件列表〕</a></li>
+        <li><a href="〔網址〕">〔其他功能〕</a></li>
+      </ul>
+      <p class="tp-sidenav__group">系統管理</p>
+      <ul>
+        <li><a href="〔網址〕">帳號與權限</a></li>
+        <li><a href="〔網址〕">操作紀錄</a></li>
+      </ul>
+    </nav>
+
+    <main class="tp-main" id="main" tabindex="-1">
+      <a class="tp-accesskey" href="#main" accesskey="C" title="中央內容區塊">:::</a>
+      <nav class="tp-crumbs" aria-label="路徑連結列">
+        <ol><li><a href="./">〔功能群組〕</a></li><li aria-current="page">〔案件列表〕</li></ol>
+      </nav>
+
+      <div class="tp-page-head">
+        <h1>〔案件列表〕</h1>
+        <a class="tp-btn tp-btn--primary" href="〔新增網址〕">〔新增案件〕</a>
+      </div>
+
+      <form class="tp-filter" method="get" aria-labelledby="filter-title">
+        <h2 id="filter-title" class="tp-visually-hidden">查詢條件</h2>
+        <div class="tp-field">
+          <label for="f-status">狀態</label>
+          <select id="f-status" name="status">
+            <option value="">全部狀態</option>
+            <option value="pending">待審核</option>
+            <option value="done">已結案</option>
+          </select>
+        </div>
+        <div class="tp-field">
+          <label for="f-q">關鍵字</label>
+          <input id="f-q" name="q" type="search" aria-describedby="f-q-hint">
+          <p class="tp-field__hint" id="f-q-hint">可輸入案件編號或部分名稱</p>
+        </div>
+        <div class="tp-filter__actions">
+          <button class="tp-btn tp-btn--primary" type="submit">查詢</button>
+        </div>
+      </form>
+
+      <div class="tp-table-wrap" tabindex="0" role="region" aria-labelledby="list-caption">
+        <table class="tp-table">
+          <caption id="list-caption">〔案件〕（共 〔N〕 筆，第 1 頁，共 〔M〕 頁）</caption>
+          <thead>
+            <tr>
+              <th scope="col" aria-sort="descending"><button class="tp-sort" type="button">案件編號</button></th>
+              <th scope="col">申請人</th>
+              <th scope="col">申請日期</th>
+              <th scope="col">狀態</th>
+              <th scope="col">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 假資料；個資預設遮蔽 -->
+            <tr>
+              <td><a href="〔詳細網址〕">1150012</a></td>
+              <td>王○明</td>
+              <td>115 年 10 月 12 日</td>
+              <td><span class="tp-status-tag">待審核</span></td>
+              <td>
+                <button class="tp-btn tp-btn--danger tp-btn--small" type="button"
+                        data-dialog="confirm-reject" data-target="1150012（王○明）">退件</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <nav class="tp-pagination" aria-label="分頁">
+        <ul>
+          <li><span aria-current="page">1</span></li>
+          <li><a href="?page=2">2</a></li>
+          <li><a href="?page=2">下一頁</a></li>
+        </ul>
+      </nav>
+    </main>
+  </div>
+
+  <!-- 不利於民眾的決定：須填理由；焦點先放在理由欄位 -->
+  <dialog class="tp-dialog" id="confirm-reject" aria-labelledby="reject-title">
+    <form method="post" action="〔退件網址〕">
+      <!-- 正式系統須加 CSRF 代碼 -->
+      <h2 id="reject-title">確定退件嗎？</h2>
+      <p>將退回案件 <strong data-dialog-target></strong>，並將退件理由通知申請人。</p>
+      <div class="tp-field">
+        <label for="reject-reason">退件理由（必填）</label>
+        <textarea id="reject-reason" name="reason" required aria-describedby="reject-hint"></textarea>
+        <p class="tp-field__hint" id="reject-hint">這段文字會通知申請人，請寫明原因與後續可以怎麼辦。</p>
+      </div>
+      <div class="tp-dialog__actions">
+        <button class="tp-btn tp-btn--secondary" type="button" data-dialog-close>取消</button>
+        <button class="tp-btn tp-btn--danger-solid" type="submit">確定退件</button>
+      </div>
+    </form>
+  </dialog>
+
+  <footer class="tp-footer" id="footer">
+    <a class="tp-accesskey" href="#footer" accesskey="Z" title="下方功能區塊">:::</a>
+    <div class="tp-footer__inner">
+      <p><span class="tp-footer__org">臺北市政府〔機關〕</span>　〔系統名稱〕管理系統（版本〔0.1〕，〔115 年 10 月 12 日〕）</p>
+      <p>系統問題聯絡窗口：〔單位、分機或信箱〕</p>
+      <ul class="tp-footer__links">
+        <li><a href="accessibility.html">無障礙聲明</a></li>
+        <li><a href="〔資料保護說明網址〕">資料保護說明</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>

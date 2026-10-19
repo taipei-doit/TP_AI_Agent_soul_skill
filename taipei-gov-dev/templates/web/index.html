@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>〔服務名稱〕｜臺北市政府〔機關〕</title>
+  <meta name="description" content="〔一句話說明這個網站可以做什麼〕">
+  <link rel="icon" href="assets/favicon.ico">
+  <link rel="stylesheet" href="assets/tp.css">
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+  <a class="tp-skip" href="#main">跳到主要內容</a>
+
+  <header class="tp-header" id="top">
+    <a class="tp-accesskey" href="#top" accesskey="U" title="上方功能區塊">:::</a>
+    <div class="tp-header__inner">
+      <a class="tp-brand" href="./">
+        <!-- Logo 從機關官網取得局處專屬標誌的原檔。找不到時（含只有市府標誌的情形），
+             刪除這行 img，改成 <span class="tp-brand__org">臺北市政府〔機關〕</span>，
+             並請承辦人提供 Logo 檔（見 references/web-ui.md 四）。 -->
+        <img src="assets/logo.svg" alt="臺北市政府〔機關〕" height="40">
+        <span class="tp-brand__name">〔服務名稱〕</span>
+      </a>
+      <nav class="tp-nav" aria-label="主要功能選單">
+        <ul>
+          <li><a href="./">首頁</a></li>
+          <li><a href="〔頁面〕.html">〔功能〕</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="tp-main" id="main" tabindex="-1">
+    <a class="tp-accesskey" href="#main" accesskey="C" title="中央內容區塊">:::</a>
+
+    <section class="tp-hero">
+      <p class="tp-eyebrow">臺北市政府〔機關〕</p>
+      <h1>〔頁面大標〕</h1>
+      <div class="tp-stripe" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <p class="tp-lead">〔用一兩句話說明這頁可以做什麼、要準備什麼〕</p>
+      <p><a class="tp-btn tp-btn--primary" href="#apply">〔動詞，例：開始申請〕</a></p>
+    </section>
+
+    <section class="tp-section" aria-labelledby="notice-title">
+      <h2 id="notice-title">〔段落標題，例：申請須知〕</h2>
+      <ol class="tp-clauses">
+        <li><span class="tp-clauses__no">一、</span>〔說明〕</li>
+        <li><span class="tp-clauses__no">二、</span>〔說明〕</li>
+        <li><span class="tp-clauses__no">三、</span>〔說明〕</li>
+      </ol>
+    </section>
+
+    <aside class="tp-band" aria-labelledby="band-title">
+      <p class="tp-band__title" id="band-title">〔重點提示標題〕</p>
+      <p>〔提示內容〕</p>
+    </aside>
+
+    <section class="tp-section" id="apply" aria-labelledby="apply-title">
+      <h2 id="apply-title">〔表單標題〕</h2>
+
+      <div class="tp-privacy">
+        <p class="tp-privacy__title">個人資料蒐集告知</p>
+        <ol class="tp-clauses tp-clauses--small">
+          <li><span class="tp-clauses__no">一、</span>蒐集機關：臺北市政府〔機關〕。</li>
+          <li><span class="tp-clauses__no">二、</span>蒐集目的：〔請填入，例：辦理○○活動報名及通知〕。</li>
+          <li><span class="tp-clauses__no">三、</span>個人資料類別：姓名、聯絡電話、電子郵件。</li>
+          <li><span class="tp-clauses__no">四、</span>利用期間、地區、對象及方式：〔請填入，例：活動結束後 6 個月內，於本〔局／處〕業務範圍內，以電話或電子郵件通知〕；期滿後刪除。</li>
+          <li><span class="tp-clauses__no">五、</span>您可以依個人資料保護法第 3 條，向本〔局／處〕請求查詢、閱覽、製給複製本、補充或更正、停止蒐集處理利用或刪除。聯絡方式：〔電話〕。</li>
+          <li><span class="tp-clauses__no">六、</span>您可以自由選擇是否提供資料；未提供必填欄位時，將無法完成〔報名〕。</li>
+        </ol>
+      </div>
+
+      <form class="tp-form" id="apply-form" novalidate>
+        <div class="tp-field">
+          <label for="name">姓名（必填）</label>
+          <input id="name" name="name" type="text" autocomplete="name" required
+                 aria-describedby="name-err">
+          <p class="tp-field__error" id="name-err" hidden></p>
+        </div>
+
+        <div class="tp-field">
+          <label for="phone">手機號碼（必填）</label>
+          <input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel"
+                 required pattern="09[0-9]{8}" aria-describedby="phone-hint phone-err">
+          <p class="tp-field__hint" id="phone-hint">10 碼數字，例：0912345678</p>
+          <p class="tp-field__error" id="phone-err" hidden></p>
+        </div>
+
+        <div class="tp-field">
+          <label for="email">電子郵件</label>
+          <input id="email" name="email" type="email" autocomplete="email"
+                 aria-describedby="email-hint email-err">
+          <p class="tp-field__hint" id="email-hint">選填，用來寄送通知，例：name@example.com</p>
+          <p class="tp-field__error" id="email-err" hidden></p>
+        </div>
+
+        <div class="tp-field tp-field--check">
+          <input id="agree" name="agree" type="checkbox" required aria-describedby="agree-err">
+          <label for="agree">我已閱讀上方個人資料蒐集告知（必填）</label>
+          <p class="tp-field__error" id="agree-err" hidden></p>
+        </div>
+
+        <button class="tp-btn tp-btn--primary" type="submit">送出申請</button>
+      </form>
+
+      <div class="tp-status" id="form-status" role="status" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="tp-footer" id="footer">
+    <a class="tp-accesskey" href="#footer" accesskey="Z" title="下方功能區塊">:::</a>
+    <div class="tp-footer__inner">
+      <p class="tp-footer__org">臺北市政府〔機關〕</p>
+      <p>地址：〔郵遞區號〕臺北市〔地址〕</p>
+      <p>電話：〔02-XXXX-XXXX〕（服務時間：週一至週五 8:30–17:30）　臺北市民當家熱線 1999</p>
+      <ul class="tp-footer__links">
+        <li><a href="privacy.html">隱私權及個人資料保護政策</a></li>
+        <li><a href="〔資訊安全政策網址〕">資訊安全政策</a></li>
+        <li><a href="〔政府網站資料開放宣告網址〕">政府網站資料開放宣告</a></li>
+        <li><a href="accessibility.html">無障礙聲明</a></li>
+        <li><a href="https://www.gov.taipei" target="_blank" rel="noopener" title="[另開新視窗]臺北市政府全球資訊網">臺北市政府全球資訊網</a></li>
+      </ul>
+      <p class="tp-footer__meta">最後更新：〔115 年 10 月 12 日〕</p>
+      <!-- 取得無障礙標章後才放：
+      <a href="〔數位發展部標章資料頁網址〕" target="_blank" rel="noopener" title="[另開新視窗]無障礙標章資料">
+        <img src="assets/accessibility-aaa.png" width="88" height="31" alt="通過AAA無障礙網頁檢測">
+      </a>
+      -->
+    </div>
+  </footer>
+</body>
+</html>
