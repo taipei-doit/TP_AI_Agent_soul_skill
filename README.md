@@ -2,6 +2,59 @@
 
 請 AI 幫您寫程式時，搭配這份規範包，不論是整理 Excel、處理 Word 文件的小工具，還是報名網站、管理系統，做出來的東西都會好用、安全，也會遵守 AI 使用的相關規定。
 
+**最快的用法**：不用安裝，直接把下面這句話貼給 AI 開發工具，後面接著寫您要做什麼。
+
+```
+請先閱讀 https://github.com/taipei-doit/TP_AI_Agent_soul_skill 的 README，依照「給 AI 的指示」把規範讀齊，再依照規範幫我開發：（寫下您要做的東西）
+```
+
+想讓每次開發都自動套用規範，請看下面的「安裝步驟」。
+
+---
+
+## 給 AI 的指示
+
+> 這一節寫給 AI 開發工具。承辦人可以略過。
+
+如果你是 AI，被要求「閱讀這個 README 並依照規範開發」，只讀這份 README 是不夠的。README 是寫給承辦人的安裝說明，規範本身在其他檔案裡。開工前請依序做到：
+
+一、**取得規範檔案。** 能執行指令時，優先下載整個專案（`git clone` 這個 repo，或下載 ZIP 解壓縮），再讀取本機檔案。不能下載時，逐一讀取下列檔案的原始內容：把網址中的 `github.com/<帳號>/<專案>` 換成 `raw.githubusercontent.com/<帳號>/<專案>/main/`，後面接檔案路徑。例如：`https://raw.githubusercontent.com/taipei-doit/TP_AI_Agent_soul_skill/main/soul.md`。
+
+二、**一定要讀的兩個檔案**，每次都要完整讀完：
+
+1. `soul.md`：協助臺北市政府同仁的基本立場與法規紅線，優先於其他所有規定。
+2. `taipei-gov-dev/SKILL.md`：規範入口。依其中「二、判斷工作類型」判斷這件工作屬於哪一類。
+
+三、**依工作類型讀取 `taipei-gov-dev/references/` 裡的檔案。** SKILL.md 的類型表列出每一類要讀哪些檔案，那些檔案也要完整讀完，不能只看檔名或只讀前幾段。可能用到的檔案：
+
+| 檔案 | 什麼時候讀 |
+|---|---|
+| `taipei-gov-dev/references/data-tools.md` | Excel、Word、PowerPoint、PDF 等文件與資料處理工具 |
+| `taipei-gov-dev/references/tech-stack.md` | 網頁與系統 |
+| `taipei-gov-dev/references/web-ui.md` | 有畫面時（含「八、不要做的樣式」，所有類型都適用） |
+| `taipei-gov-dev/references/accessibility.md` | 有畫面時 |
+| `taipei-gov-dev/references/writing.md` | 所有類型 |
+| `taipei-gov-dev/references/privacy.md` | 用到個人資料時 |
+| `taipei-gov-dev/references/security.md` | 所有類型 |
+| `taipei-gov-dev/references/systems.md` | 有登入、後臺、上傳、資料庫、名額時 |
+| `taipei-gov-dev/references/verification.md` | 所有類型（完成後的檢查） |
+| `taipei-gov-dev/references/delivery.md` | 所有類型（交付說明） |
+| `taipei-gov-dev/references/legal-sources.md` | 需要引用法規原文時 |
+| `taipei-gov-dev/templates/web/` 底下的檔案 | 對外網頁、內部小工具（共用樣式 `assets/tp.css`） |
+| `taipei-gov-dev/templates/admin/` 底下的檔案 | 管理後臺 |
+
+四、**開工前先回報**，讓承辦人確認你有讀齊：
+
+```
+工作類型：〔例：C 類對外資訊網頁，承辦人指定活潑設計〕
+已讀取：soul.md、taipei-gov-dev/SKILL.md、〔依類型讀取的檔案〕
+讀取失敗：〔沒有就寫「無」〕
+```
+
+有任何一個該讀的檔案讀不到，要明確告訴承辦人，不可以憑印象或猜測代替規範內容。
+
+五、**讀齊後直接開工。** 依 SKILL.md「三、工作流程」進行：只問會影響做法的問題，承辦人已經講清楚的就不必再問，用預設做法先做出可以用的版本。
+
 ---
 
 ## 這是什麼？
@@ -120,6 +173,7 @@ AI 開發工具要「進到」您的資料夾，才能讀到規範、在裡面�
 - .claude/skills/taipei-gov-dev/SKILL.md：臺北市政府開發規範的入口，請依其中的說明判斷工作類型，再閱讀需要的規範檔
 
 你所使用的工具即使不支援 Skill 功能，也請直接開啟上述 SKILL.md 檔案閱讀。
+開工前，請先列出工作類型與已讀取的檔案。
 若無法讀取這兩個檔案，請先告知使用者，不要直接開始開發。
 ===結束===
 
@@ -244,6 +298,14 @@ AI 開工前可能會問您幾個問題，例如「這個網頁給誰用」「�
 ---
 
 ## 常見問題
+
+**問：AI 好像只讀了 README 就開工，沒有照規範做。**
+
+答：照規範做的 AI，開工前會先列出「工作類型」「已讀取」哪些檔案。沒有列出，或「已讀取」只有 README，請直接跟它說：
+
+```
+請依照 README「給 AI 的指示」，把 soul.md、taipei-gov-dev/SKILL.md 和這次工作需要的 references 檔案完整讀完，列出已讀取的檔案後再重新開始。
+```
 
 **問：AI 好像沒有照規範做，做出來還是藍紫色的。**
 
