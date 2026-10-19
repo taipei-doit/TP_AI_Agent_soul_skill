@@ -41,6 +41,16 @@ metadata:
 | E. 系統 | 有登入、管理後臺、檔案上傳、資料庫，或多個機關共用 | D 類的檔案，加上 `systems.md`；後臺範本在 `templates/admin/` |
 | F. 系統本身用到 AI | AI 客服、AI 摘要、自動分類陳情 | 依上面的類型，再加上 soul.md 第五節的風險評估 |
 
+常見的五類助手工具，先依上表判斷類型，再加讀 `references/assistants.md` 對應的段落：
+
+| 助手 | 通常屬於 | 特別注意 |
+|---|---|---|
+| 公務系統助手（代為讀取、填寫公務系統資料） | A 或 B 類 | 只填不送出；先確認系統允許自動化；不碰帳號密碼 |
+| 文書紀錄助理（錄音、會議資料整理成紀錄草稿） | A 類，用 AI 摘要時加 F 類 | 錄音是敏感資料；轉寫在哪裡做要先確認；不補內容 |
+| 資料檢核助手（依規則比對文件、產出檢核結果） | A 類 | 規則由承辦人提供；結果能追到來源；只標「疑似不一致」 |
+| 網站巡查員（檢查連結、更新狀態） | A 類 | 只巡查有權管理的網站；控制頻率；只看不動 |
+| 資訊轉譯助理（整理資訊產製文字、影音） | A 或 C 類，用 AI 生成時加 F 類 | 只用可查證資料；發布前審閱；AI 生成內容要標示 |
+
 判斷時注意：
 
 - 不要把用不到的規範套上去。Excel、Word 處理工具不放 Logo、頁尾、市徽四色條；只有自己用的小工具不需要無障礙聲明與標章。
@@ -92,6 +102,7 @@ metadata:
 | `references/systems.md` | 管理後臺、登入、權限、檔案上傳、操作紀錄、名額、共用平臺 |
 | `references/verification.md` | 各類工作要做的檢查、回報方式、交付前檢核清單 |
 | `references/delivery.md` | 交付說明範本 |
+| `references/assistants.md` | 公務系統助手、文書紀錄助理、資料檢核助手、網站巡查員、資訊轉譯助理 |
 | `references/legal-sources.md` | 法規與指引的原文出處、條號、核對日期 |
 | `templates/web/` | 對外網頁範本：`index.html`、`accessibility.html`、`privacy.html`、`assets/tp.css`、`assets/app.js` |
 | `templates/admin/` | 管理後臺版面範本：`index.html`（共用 `templates/web/assets/tp.css`） |
