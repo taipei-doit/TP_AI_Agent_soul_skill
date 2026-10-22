@@ -105,4 +105,5 @@ metadata:
 | `references/assistants.md` | 公務系統助手、文書紀錄助理、資料檢核助手、網站巡查員、資訊轉譯助理 |
 | `references/legal-sources.md` | 法規與指引的原文出處、條號、核對日期 |
 | `templates/web/` | 對外網頁範本：`index.html`、`accessibility.html`、`privacy.html`、`assets/tp.css`、`assets/app.js` |
+| `scripts/extract_zh_text.py` | 把網頁與程式檔裡的中文抓出來，供用語檢查工具檢查（見 `writing.md` 四） |
 | `templates/admin/` | 管理後臺版面範本：`index.html`（共用 `templates/web/assets/tp.css`） |

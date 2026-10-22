@@ -47,6 +47,7 @@
 | `taipei-gov-dev/references/legal-sources.md` | 需要引用法規原文時 |
 | `taipei-gov-dev/templates/web/` 底下的檔案 | 對外網頁、內部小工具（共用樣式 `assets/tp.css`） |
 | `taipei-gov-dev/templates/admin/` 底下的檔案 | 管理後臺 |
+| `taipei-gov-dev/scripts/extract_zh_text.py` | 要用 zhtw-mcp 檢查網頁或程式裡的中文時 |
 
 四、**開工前先回報**，讓承辦人確認你已經讀齊：
 
