@@ -336,7 +336,7 @@ p { margin: 0 0 1rem; }
 }
 .tp-pagination [aria-current="page"] { background: var(--tp-primary); border-color: var(--tp-primary); color: #FFFFFF; font-weight: 700; }
 
-/* 確認對話框（原生 dialog） */
+/* 確認對話方塊（原生 dialog） */
 .tp-dialog {
   width: min(32em, calc(100vw - 32px));
   padding: 24px;

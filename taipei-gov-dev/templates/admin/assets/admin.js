@@ -1,4 +1,4 @@
-// 管理後臺共用程式：手機選單開合、確認對話框。
+// 管理後臺共用程式：手機選單開合、確認對話方塊。
 // 顯示文字一律用 textContent，不使用 innerHTML。
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 確認對話框：開啟時焦點放在第一個必填欄位，沒有就放在「取消」；關閉後焦點回到原按鈕
+  // 確認對話方塊：開啟時焦點放在第一個必填欄位，沒有就放在「取消」；關閉後焦點回到原按鈕
   document.querySelectorAll('[data-dialog]').forEach((opener) => {
     opener.addEventListener('click', () => {
       const dialog = document.getElementById(opener.dataset.dialog);
