@@ -19,6 +19,13 @@ EXTS = {'.html', '.htm', '.js', '.jsx', '.ts', '.tsx', '.vue', '.py'}
 HAS_ZH = re.compile(r'[㐀-鿿豈-﫿]')
 ATTRS = {'alt', 'title', 'aria-label', 'placeholder', 'content', 'value', 'label'}
 SKIP_DIRS = {'node_modules', '.git', '.venv', 'venv', '__pycache__', 'dist', 'build'}
+CJK = r'[\u3000-\u303f\u3400-\u9fff\uf900-\ufaff\uff00-\uffef]'
+CJK_GAP = re.compile(rf'(?<={CJK})[ \t]*\n\s*(?={CJK})')
+
+
+def tidy(s):
+    """兩個中文字或全形標點之間的換行直接接起來，其餘連續空白縮成一格。"""
+    return ' '.join(CJK_GAP.sub('', s).split())
 
 
 class HtmlText(HTMLParser):
@@ -34,7 +41,7 @@ class HtmlText(HTMLParser):
             self.skip += 1
         for name, value in attrs:
             if name in ATTRS and value and HAS_ZH.search(value):
-                self.out.append((self.getpos()[0], value.strip()))
+                self.out.append((self.getpos()[0], tidy(value)))
 
     def handle_endtag(self, tag):
         if tag in ('script', 'style') and self.skip:
@@ -42,11 +49,11 @@ class HtmlText(HTMLParser):
 
     def handle_data(self, data):
         if not self.skip and HAS_ZH.search(data):
-            self.out.append((self.getpos()[0], ' '.join(data.split())))
+            self.out.append((self.getpos()[0], tidy(data)))
 
     def handle_comment(self, data):
         if HAS_ZH.search(data):
-            self.out.append((self.getpos()[0], ' '.join(data.split())))
+            self.out.append((self.getpos()[0], tidy(data)))
 
 
 def from_code(text, python=False):
@@ -56,7 +63,7 @@ def from_code(text, python=False):
 
     def add(start_line, s):
         if HAS_ZH.search(s):
-            found.append((start_line, ' '.join(s.split())))
+            found.append((start_line, tidy(s)))
 
     while i < n:
         c = text[i]
